@@ -3,3 +3,6 @@
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
 
+.enemy {
+  background: url(asteroid.png) no-repeat;
+}
