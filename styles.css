@@ -8,6 +8,7 @@ h2 {
 }
 svg {
   border: 1px solid #ccc;
+  cursor: none;
 }
 .hit {
   background-color: #F98580;
@@ -30,7 +31,7 @@ svg {
 .player {
   fill: url(#player);
 }
-.playerHit {
+.player.hit {
   fill: url(#playerHit);
 }
 .enemy {

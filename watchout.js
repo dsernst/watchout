@@ -4,6 +4,7 @@
 var width = 960;
 var height = 540;
 var enemySize = 15;
+var enemySpeed = 2500;
 
 // Stats
 var score = 0;
@@ -44,7 +45,7 @@ var svg = d3.select("#gameboard svg")
 // Enemies
 var updateEnemies = function () {
   svg.selectAll("circle.enemy")
-  .transition().duration(1500)
+  .transition().duration(enemySpeed)
   .attr("cx", function(){return Math.random() * (xmax - min) + min;})
   .attr("cy", function(){return Math.random() * (ymax - min) + min;});
   updateScore();
@@ -71,24 +72,18 @@ setInterval(function() {
 
 
 // Player
-var drag = d3.behavior.drag()
-  .on("drag", function() {
-      var dragX = d3.event.x;
-      var dragY = d3.event.y;
-      if (dragX > 0 && dragX < width) {
-        d3.select(this).attr("cx", d3.event.x);
-      }
-      if (dragY > 0 && dragY < height) {
-        d3.select(this).attr("cy", d3.event.y);
-      }
-    });
-
 var player = svg.append("circle")
   .attr("class", "player")
   .attr("r", 24)
   .attr("cx", width / 2)
-  .attr("cy", 40)
-  .call(drag);
+  .attr("cy", 40);
+
+svg.on("mousemove", function() {
+  var mouse = d3.mouse(this);
+  d3.select(".player")
+    .attr("cx", mouse[0])
+    .attr("cy", mouse[1]);
+});
 
 var checkCollision = function (collidedCallback) {
   svg.selectAll("circle.enemy")
@@ -110,7 +105,7 @@ var onCollision = function () {
     .transition()
     .attr("class", "hit");
   player.transition()
-    .attr("class", "playerHit");
+    .attr("class", "player hit");
   setTimeout(function(){
     svg.transition()
       .attr("class","");
