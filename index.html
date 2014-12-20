@@ -6,6 +6,11 @@
   </head>
   <body>
     <h2>Let's Play Ninja Warrior!!</h2>
+    <div class="scoreboard">
+      <div class="high alignleft">High score: <span>0</span></div>
+      <div class="current aligncenter">Current score: <span>0</span></div>
+      <div class="collisions alignright">Visits to the Vet: <span>0</span></div>
+    </div>
     <div id="gameboard">
       <svg>
         <defs>
@@ -21,12 +26,6 @@
         </defs>
         <image id="background" x="0" y="0" width="960" height="540" xlink:href="Bus-stop.jpg"></image>
       </svg>
-    </div>
-    <div class="scoreboard">
-      <!-- Modify the scoreboard when important events occur in your game! -->
-      <div class="high">High score: <span>0</span></div>
-      <div class="current">Current score: <span>0</span></div>
-      <div class="collisions">Visits to the Vet: <span>0</span></div>
     </div>
     <script src="d3.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
