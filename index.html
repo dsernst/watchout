@@ -3,15 +3,22 @@
   <head>
     <link rel='stylesheet' type='css' href='styles.css'>
   </head>
-  <body data-test="hello">
+  <body>
     <h2>Let's Play Ninja Warrior!!</h2>
     <div id="gameboard">
+      <svg>
+        <defs id="mdef">
+          <pattern id="shuriken" x="0" y="0" height="50" width="50">
+            <image x="0" y="0" width="50" height="50" xlink:href="ninja_shuriken_50x50.png"></image>
+          </pattern>
+        </defs>
+      </svg>
     </div>
     <div class="scoreboard">
       <!-- Modify the scoreboard when important events occur in your game! -->
       <div class="high">High score: <span>0</span></div>
       <div class="current">Current score: <span>0</span></div>
-      <div class="collisions">Collisions: <span>0</span></div>
+      <div class="collisions">Visits to the Vet: <span>0</span></div>
     </div>
     <script src="d3.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>

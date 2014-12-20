@@ -1,7 +1,11 @@
-/* your beautiful css styling goes here! */
-
-/* Note: an asteroid image is included in this repo.
-Feel free to use it if you like. */
+body {
+  width: 800px;
+  margin: 0 auto;
+  font-family: "Helvetica";
+}
+h2 {
+  text-align: center;
+}
 svg {
   border: 1px solid #ccc;
 }
@@ -9,8 +13,15 @@ svg.hit {
   background-color: #F98580;
 }
 .enemy {
-  background: url(asteroid.png) no-repeat;
+  fill: url(#shuriken);
+  -webkit-animation: spin 2.25s infinite linear;
+  transform-origin: 50% 50%;
 }
 .david {
   fill: orange;
+}
+
+@-webkit-keyframes spin {
+    0%   {-webkit-transform: rotate(0deg)}
+    100% {-webkit-transform: rotate(359deg)}
 }

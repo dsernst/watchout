@@ -32,18 +32,20 @@ var clearScore = _.throttle(function () {
 
 
 // Build the game
-var xmin =  0 + enemySize;
-var xmax =  height - enemySize;
+var enemyHidingRoom = 2 * enemySize;
+var min = 0 - enemyHidingRoom;
+var xmax = width + enemyHidingRoom;
+var ymax = height + enemyHidingRoom;
 
-var svg = d3.select("#gameboard").append("svg")
+var svg = d3.select("#gameboard svg")
     .attr("width", width)
     .attr("height", height);
 
 var updateEnemies = function () {
   svg.selectAll("circle.enemy")
-  .transition()
-  .attr("cx", function(){return Math.random() * (width - 50);})
-  .attr("cy", function(){return Math.random() * (xmax - xmin) + xmin;});
+  .transition().duration(1000)
+  .attr("cx", function(){return Math.random() * (xmax - min) + min;})
+  .attr("cy", function(){return Math.random() * (ymax - min) + min;});
   updateScore();
 };
 
@@ -60,8 +62,14 @@ var createEnemies = function (data) {
 
 var drag = d3.behavior.drag()
   .on("drag", function() {
-      d3.select(this).attr("cx", d3.event.x);
-      d3.select(this).attr("cy", d3.event.y);
+      var dragX = d3.event.x;
+      var dragY = d3.event.y;
+      if (dragX > 0 && dragX < width) {
+        d3.select(this).attr("cx", d3.event.x);
+      }
+      if (dragY > 0 && dragY < height) {
+        d3.select(this).attr("cy", d3.event.y);
+      }
     });
 
 var player = svg.append("circle")
