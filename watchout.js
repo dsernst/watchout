@@ -17,6 +17,7 @@ var svg = d3.select("body").append("svg")
 var update = function () {
   svg.selectAll("circle")
     .filter(".enemy")
+    .transition()
     .attr("cx", function(){return Math.random() * (width - 50);})
     .attr("cy", function(){return Math.random() * (xmax - xmin) + xmin;});
 };
@@ -33,7 +34,7 @@ var create = function (data) {
 };
 
 var drag = d3.behavior.drag()
-  .on("drag", function(d) {
+  .on("drag", function() {
       d3.select(this).attr("cx", d3.event.x);
       d3.select(this).attr("cy", d3.event.y);
     });
