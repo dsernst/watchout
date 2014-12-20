@@ -2,8 +2,8 @@
 // start slingin' some d3 here.
 
 // Game Configs
-var width = 750;
-var height = 500;
+var width = 960;
+var height = 540;
 var enemySize = 15;
 
 // Stats
@@ -95,12 +95,17 @@ var checkCollision = function (collidedCallback) {
 };
 
 var onCollision = function () {
-  svg.transition()
+  svg.select("#background")
+    .transition()
     .attr("class", "hit");
+  player.transition()
+    .attr("class", "playerHit");
   setTimeout(function(){
     svg.transition()
-    .attr("class","");
-  },90);
+      .attr("class","");
+    player.transition()
+      .attr("class", "player");
+  },500);
   clearScore();
 };
 
