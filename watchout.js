@@ -4,7 +4,7 @@
 // Game Configs
 var width = 750;
 var height = 500;
-var enemySize = 25;
+var enemySize = 15;
 
 // Stats
 var score = 0;
@@ -43,7 +43,7 @@ var svg = d3.select("#gameboard svg")
 
 var updateEnemies = function () {
   svg.selectAll("circle.enemy")
-  .transition().duration(1000)
+  .transition().duration(1500)
   .attr("cx", function(){return Math.random() * (xmax - min) + min;})
   .attr("cy", function(){return Math.random() * (ymax - min) + min;});
   updateScore();
