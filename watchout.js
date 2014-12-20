@@ -1,4 +1,4 @@
-/*globals d3*/
+/*globals d3,_*/
 // start slingin' some d3 here.
 
 // Game Configs
@@ -6,10 +6,36 @@ var width = 750;
 var height = 500;
 var enemySize = 25;
 
+// Stats
+var score = 0;
+var highScore = 0;
+var collisions = 0;
+
+var updateScore = function() {
+  score += 1;
+  d3.select(".current span")
+    .html(score);
+};
+
+var clearScore = _.throttle(function () {
+  if (highScore < score) {
+    highScore = score;
+    d3.select(".high span")
+    .html(highScore);
+  }
+  score = -1;
+  updateScore();
+  collisions += 1;
+  d3.select(".collisions span")
+    .html(collisions);
+}, 1500);
+
+
+// Build the game
 var xmin =  0 + enemySize;
 var xmax =  height - enemySize;
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#gameboard").append("svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -18,9 +44,10 @@ var updateEnemies = function () {
   .transition()
   .attr("cx", function(){return Math.random() * (width - 50);})
   .attr("cy", function(){return Math.random() * (xmax - xmin) + xmin;});
+  updateScore();
 };
 
-var create = function (data) {
+var createEnemies = function (data) {
   var enemies = svg.selectAll("circle")
       .data(data);
 
@@ -60,22 +87,22 @@ var checkCollision = function (collidedCallback) {
 };
 
 var onCollision = function () {
-  // d3.select("svg")
   svg.transition()
     .attr("class", "hit");
   setTimeout(function(){
     svg.transition()
     .attr("class","");
   },90);
+  clearScore();
 };
 
 var deathBalls = [1,2,3,4,5,6,7,8,9,10];
 
-create(deathBalls);
+createEnemies(deathBalls);
 
 setInterval(function() {
   updateEnemies();
-}, 1000);
+}, 1500);
 
 setInterval(function() {
   checkCollision(onCollision);
