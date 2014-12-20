@@ -1,5 +1,4 @@
 /*globals d3,_*/
-// start slingin' some d3 here.
 
 // Game Configs
 var width = 960;
@@ -41,6 +40,8 @@ var svg = d3.select("#gameboard svg")
     .attr("width", width)
     .attr("height", height);
 
+
+// Enemies
 var updateEnemies = function () {
   svg.selectAll("circle.enemy")
   .transition().duration(1500)
@@ -60,6 +61,16 @@ var createEnemies = function (data) {
   updateEnemies();
 };
 
+var deathBalls = [1,2,3,4,5,6,7,8,9,10];
+
+createEnemies(deathBalls);
+
+setInterval(function() {
+  updateEnemies();
+}, 1500);
+
+
+// Player
 var drag = d3.behavior.drag()
   .on("drag", function() {
       var dragX = d3.event.x;
@@ -108,14 +119,6 @@ var onCollision = function () {
   },500);
   clearScore();
 };
-
-var deathBalls = [1,2,3,4,5,6,7,8,9,10];
-
-createEnemies(deathBalls);
-
-setInterval(function() {
-  updateEnemies();
-}, 1500);
 
 setInterval(function() {
   checkCollision(onCollision);
