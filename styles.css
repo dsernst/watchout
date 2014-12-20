@@ -17,8 +17,8 @@ svg.hit {
   -webkit-animation: spin 2.25s infinite linear;
   transform-origin: 50% 50%;
 }
-.david {
-  fill: orange;
+.player {
+  fill: url(#player);
 }
 
 @-webkit-keyframes spin {

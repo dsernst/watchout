@@ -73,8 +73,8 @@ var drag = d3.behavior.drag()
     });
 
 var player = svg.append("circle")
-  .attr("class", "david")
-  .attr("r", 15)
+  .attr("class", "player")
+  .attr("r", 24)
   .attr("cx", width / 2)
   .attr("cy", 40)
   .call(drag);
