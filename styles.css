@@ -5,10 +5,12 @@ Feel free to use it if you like. */
 svg {
   border: 1px solid #ccc;
 }
+svg.hit {
+  background-color: #F98580;
+}
 .enemy {
   background: url(asteroid.png) no-repeat;
 }
-
 .david {
   fill: orange;
 }
