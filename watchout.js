@@ -27,7 +27,7 @@ var clearScore = _.throttle(function () {
   updateScore();
   collisions += 1;
   d3.select(".collisions span")
-    .html(collisions);
+    .html(collisions * 165);
 }, 1500);
 
 
