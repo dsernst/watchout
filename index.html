@@ -6,30 +6,32 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
   </head>
   <body>
-    <h2>Let's Play Ninja Warrior!!</h2>
-    <div class="scoreboard">
-      <div class="high alignleft">High score: <span>0</span></div>
-      <div class="current aligncenter">Current score: <span>0</span></div>
-      <div class="collisions alignright">Veterinary Bills: $<span>0</span></div>
+    <div class="centered">
+      <h2>Let's Play Ninja Warrior!!</h2>
+      <div class="scoreboard">
+        <div class="high alignleft">High score: <span>0</span> shurikens</div>
+        <div class="current aligncenter">Number dodged: <span>0</span></div>
+        <div class="collisions alignright">Veterinary Bills: $<span>0</span></div>
+      </div>
+      <div id="gameboard">
+        <svg>
+          <defs>
+            <pattern id="shuriken" x="0" y="0" height="30" width="30">
+              <image x="0" y="0" width="30" height="30" xlink:href="ninja_shuriken_outline_50x50.png"></image>
+            </pattern>
+            <pattern id="player" x="0" y="0" width="55" height="62">
+              <image x="3" y="1" width="55" height="62" xlink:href="butters_55px.png"></image>
+            </pattern>
+            <pattern id="playerHit" x="0" y="0" width="55" height="62">
+              <image x="3" y="1" width="55" height="62" xlink:href="butters_hit_55px.png"></image>
+            </pattern>
+          </defs>
+          <image id="background" x="0" y="0" width="960" height="540" xlink:href="Bus-stop.jpg"></image>
+        </svg>
+      </div>
+      <script src="d3.js" charset="utf-8"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+      <script src='watchout.js'></script>
     </div>
-    <div id="gameboard">
-      <svg>
-        <defs>
-          <pattern id="shuriken" x="0" y="0" height="30" width="30">
-            <image x="0" y="0" width="30" height="30" xlink:href="ninja_shuriken_outline_50x50.png"></image>
-          </pattern>
-          <pattern id="player" x="0" y="0" width="55" height="62">
-            <image x="3" y="1" width="55" height="62" xlink:href="butters_55px.png"></image>
-          </pattern>
-          <pattern id="playerHit" x="0" y="0" width="55" height="62">
-            <image x="3" y="1" width="55" height="62" xlink:href="butters_hit_55px.png"></image>
-          </pattern>
-        </defs>
-        <image id="background" x="0" y="0" width="960" height="540" xlink:href="Bus-stop.jpg"></image>
-      </svg>
-    </div>
-    <script src="d3.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
-    <script src='watchout.js'></script>
   </body>
 </html>

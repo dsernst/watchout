@@ -1,12 +1,17 @@
 body {
-  width: 960px;
-  margin: 0 auto;
   font-family: "Helvetica";
   background-color: rgb(5, 14, 32);
   color: #ececec;
 }
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 h2 {
   text-align: center;
+  font-size: 40px;
 }
 svg {
   border: 0px solid #ccc;
