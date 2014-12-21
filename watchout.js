@@ -4,34 +4,41 @@
 var width = 960;
 var height = 540;
 var enemySize = 15;
-var enemySpeed = 1800;
-var enemyMoveInterval = 2000;
+var enemySpeed = 2500;
+var enemyMoveInterval = 2500;
 var initEnemies = 10;
-var enemySpawnTime = 1000;
+var numEnemies = initEnemies;
+var enemySpawnTime = 2000;
 
 // Stats
 var score = 0;
 var highScore = 0;
 var collisions = 0;
+var scoreUpdateRate = 1000;
 
 var updateScore = function() {
-  score += 1;
+  score++;
   d3.select(".current span")
     .html(score);
 };
 
 var clearScore = _.throttle(function () {
-  if (highScore < score) {
-    highScore = score;
+  if (highScore < numEnemies) {
+    highScore = numEnemies;
     d3.select(".high span")
     .html(highScore);
   }
-  score = -1;
-  updateScore();
+  score = 0;
+  d3.select(".current span")
+    .html(score);
   collisions += 1;
   d3.select(".collisions span")
     .html(collisions * 165);
 }, 1500);
+
+setInterval(function() {
+    updateScore();
+  }, scoreUpdateRate);
 
 
 // Build the game
@@ -42,8 +49,6 @@ var svg = d3.select("#gameboard svg")
     .attr("height", height);
 
 // Enemies
-var numEnemies = initEnemies;
-
 var generateEnemyPos = function () {
   var pos = {};
   pos.x = -enemyHidingRoom;
@@ -73,7 +78,6 @@ var updateEnemies = function () {
     .ease("linear-in-out")
     .attr("cx", function() {return this.x;})
     .attr("cy", function() {return this.y;});
-  updateScore();
 };
 
 var createEnemies = function (data) {
@@ -88,13 +92,14 @@ var createEnemies = function (data) {
     .attr("cy", function() {return this.y;});
 
   enemies.exit().remove();
+  scoreUpdateRate *= 0.90;
 };
 
 var clearEnemies = function (data) {
   svg.selectAll("circle.enemy")
     .data(data)
     .exit().remove();
-}
+};
 
 createEnemies(_.range(numEnemies));
 
@@ -121,6 +126,7 @@ svg.on("mousemove", function() {
     .attr("cy", mouse[1]);
 });
 
+// Collisions
 var checkCollision = function (collidedCallback) {
   svg.selectAll("circle.enemy")
   .each(function() {
@@ -142,8 +148,8 @@ var onCollision = function () {
   setTimeout(function(){
     player.transition()
       .attr("class", "player");
-    clearScore();
-  },1000);
+  },1500);
+  clearScore();
   clearEnemies([]);
   numEnemies = initEnemies;
 };
