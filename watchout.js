@@ -4,9 +4,10 @@
 var width = 960;
 var height = 540;
 var enemySize = 15;
-var enemySpeed = 2500;
-var initEnemies = 5;
-var enemySpawnTime = 5000;
+var enemySpeed = 1800;
+var enemyMoveInterval = 2000;
+var initEnemies = 10;
+var enemySpawnTime = 1000;
 
 // Stats
 var score = 0;
@@ -43,13 +44,38 @@ var svg = d3.select("#gameboard svg")
     .attr("width", width)
     .attr("height", height);
 
-
 // Enemies
+var numEnemies = initEnemies;
+
+var generateEnemyPos = function () {
+  var pos = {};
+  pos.x = -enemyHidingRoom;
+  pos.y = -enemyHidingRoom;
+  var side = Math.floor(Math.random() * 4);
+  var percentage = Math.random();
+  if (side === 0 || side === 2) {
+    pos.x = width * percentage;
+  } else {
+    pos.y = height * percentage;
+  }
+  if (side === 1) {
+    pos.x = width + enemyHidingRoom;
+  }
+  if (side === 2) {
+    pos.y = height + enemyHidingRoom;
+  }
+  this.x = pos.x;
+  this.y = pos.y;
+};
+
 var updateEnemies = function () {
   svg.selectAll("circle.enemy")
-  .transition().duration(enemySpeed)
-  .attr("cx", function(){return Math.random() * (xmax - min) + min;})
-  .attr("cy", function(){return Math.random() * (ymax - min) + min;});
+    .each(generateEnemyPos)
+    .transition()
+    .duration(enemySpeed)
+    .ease("linear-in-out")
+    .attr("cx", function() {return this.x;})
+    .attr("cy", function() {return this.y;});
   updateScore();
 };
 
@@ -60,18 +86,18 @@ var createEnemies = function (data) {
   enemies.enter().append("circle")
     .attr("class", "enemy")
     .attr("r", enemySize)
-    .attr("cx", function(){return Math.random() * (xmax - min) + min;})
-    .attr("cy", function(){return Math.random() * (ymax - min) + min;});
+    .each(generateEnemyPos)
+    .attr("cx", function() {return this.x;})
+    .attr("cy", function() {return this.y;});
 
   enemies.exit().remove();
 };
 
-var numEnemies = initEnemies;
 createEnemies(_.range(numEnemies));
 
 setInterval(function() {
   updateEnemies();
-}, 1500);
+}, enemyMoveInterval);
 
 setInterval(function() {
   numEnemies++;
