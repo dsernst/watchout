@@ -5,9 +5,9 @@ body {
 }
 .centered {
   position: fixed;
-  top: 50%;
+  top: 35%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -35%);
 }
 h2 {
   text-align: center;
@@ -46,4 +46,8 @@ svg {
 @-webkit-keyframes spin {
     0%   {-webkit-transform: rotate(0deg)}
     100% {-webkit-transform: rotate(359deg)}
+}
+#episode {
+  color: white;
+  float: right;
 }
