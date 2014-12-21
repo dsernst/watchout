@@ -2,12 +2,14 @@ body {
   width: 960px;
   margin: 0 auto;
   font-family: "Helvetica";
+  background-color: rgb(5, 14, 32);
+  color: #ececec;
 }
 h2 {
   text-align: center;
 }
 svg {
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   cursor: none;
 }
 .alignleft {
