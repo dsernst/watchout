@@ -57,3 +57,8 @@ svg {
   color: white;
   float: right;
 }
+.newHighScore {
+  fill: white;
+  font-size: 90px;
+  font-weight: bold;
+}

@@ -23,10 +23,19 @@ var updateScore = function() {
 };
 
 var clearScore = _.throttle(function () {
-  if (highScore < numEnemies) {
+  if (numEnemies > highScore) {
     highScore = numEnemies;
     d3.select(".high span")
-    .html(highScore);
+      .html(highScore);
+    svg.append("text")
+      .text("New highscore!!")
+      .attr("class", "newHighScore")
+      .attr("x", 0)
+      .attr("y", 100);
+    setTimeout(function(){
+      d3.select(".newHighScore")
+      .remove();
+    }, 1500);
   }
   score = 0;
   d3.select(".current span")
