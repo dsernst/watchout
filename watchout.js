@@ -5,6 +5,8 @@ var width = 960;
 var height = 540;
 var enemySize = 15;
 var enemySpeed = 2500;
+var initEnemies = 5;
+var enemySpawnTime = 5000;
 
 // Stats
 var score = 0;
@@ -57,19 +59,24 @@ var createEnemies = function (data) {
 
   enemies.enter().append("circle")
     .attr("class", "enemy")
-    .attr("r", enemySize);
+    .attr("r", enemySize)
+    .attr("cx", function(){return Math.random() * (xmax - min) + min;})
+    .attr("cy", function(){return Math.random() * (ymax - min) + min;});
 
-  updateEnemies();
+  enemies.exit().remove();
 };
 
-var deathBalls = [1,2,3,4,5,6,7,8,9,10];
-
-createEnemies(deathBalls);
+var numEnemies = initEnemies;
+createEnemies(_.range(numEnemies));
 
 setInterval(function() {
   updateEnemies();
 }, 1500);
 
+setInterval(function() {
+  numEnemies++;
+  createEnemies(_.range(numEnemies));
+}, enemySpawnTime);
 
 // Player
 var player = svg.append("circle")
@@ -108,6 +115,7 @@ var onCollision = function () {
       .attr("class", "player");
   },1000);
   clearScore();
+  numEnemies = initEnemies;
 };
 
 setInterval(function() {
