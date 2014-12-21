@@ -74,7 +74,7 @@ setInterval(function() {
 // Player
 var player = svg.append("circle")
   .attr("class", "player")
-  .attr("r", 24)
+  .attr("r", 31)
   .attr("cx", width / 2)
   .attr("cy", 40);
 
@@ -101,17 +101,12 @@ var checkCollision = function (collidedCallback) {
 };
 
 var onCollision = function () {
-  svg.select("#background")
-    .transition()
-    .attr("class", "hit");
   player.transition()
     .attr("class", "player hit");
   setTimeout(function(){
-    svg.transition()
-      .attr("class","");
     player.transition()
       .attr("class", "player");
-  },500);
+  },1000);
   clearScore();
 };
 
