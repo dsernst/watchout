@@ -50,6 +50,9 @@ svg {
 .music {
   float: left;
 }
+#ohHamburgers {
+  display: none;
+}
 #episode {
   color: white;
   float: right;

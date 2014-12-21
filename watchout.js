@@ -143,6 +143,7 @@ var checkCollision = function (collidedCallback) {
 };
 
 var onCollision = function () {
+  document.getElementById('ohHamburgers').play();
   player.transition()
     .attr("class", "player hit");
   setTimeout(function(){
