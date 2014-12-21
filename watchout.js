@@ -36,9 +36,6 @@ var clearScore = _.throttle(function () {
 
 // Build the game
 var enemyHidingRoom = 2 * enemySize;
-var min = 0 - enemyHidingRoom;
-var xmax = width + enemyHidingRoom;
-var ymax = height + enemyHidingRoom;
 
 var svg = d3.select("#gameboard svg")
     .attr("width", width)
@@ -93,6 +90,12 @@ var createEnemies = function (data) {
   enemies.exit().remove();
 };
 
+var clearEnemies = function (data) {
+  svg.selectAll("circle.enemy")
+    .data(data)
+    .exit().remove();
+}
+
 createEnemies(_.range(numEnemies));
 
 setInterval(function() {
@@ -139,8 +142,9 @@ var onCollision = function () {
   setTimeout(function(){
     player.transition()
       .attr("class", "player");
+    clearScore();
   },1000);
-  clearScore();
+  clearEnemies([]);
   numEnemies = initEnemies;
 };
 
